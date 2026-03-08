@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Greys Funtime Gmod Server!</title>
+
+<style>
+body{
+    background:#121212;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+    margin:0;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+    padding-top:40px;
+}
+
+h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.collection-button{
+    display:inline-block;
+    padding:15px 25px;
+    margin-top:20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    border-radius:8px;
+}
+
+.collection-button:hover{
+    background:#45a049;
+}
+
+.slideshow{
+    margin-top:40px;
+}
+
+.slideshow img{
+    width:80%;
+    max-height:450px;
+    object-fit:cover;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome to Grey's Garrysmod Server!</h1>
+<p>Make sure you install the workshop collection before joining.</p>
+
+
+<a class="collection-button" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3680856353" target="_blank">
+Open Workshop Collection
+</a>
+
+<div class="slideshow">
+<img id="slide" src="images/image1.jpg">
+</div>
+
+</div>
+
+<script>
+
+const images = [
+"images/Day_grey.png",
+"images/chat.png",
+"images/furry.jpg",
+"images/grind.jpg",
+"images/small_grey.jpg",
+"images/heckdivers.png",
+"images/Grey_night.png"
+];
+
+function randomSlide(){
+    const slide = document.getElementById("slide");
+    const randomIndex = Math.floor(Math.random() * images.length);
+    slide.src = images[randomIndex];
+
+    const nextTime = 8000 + Math.random()*2000;
+    setTimeout(randomSlide, nextTime);
+}
+
+randomSlide();
+
+</script>
+
+</body>
+</html>
