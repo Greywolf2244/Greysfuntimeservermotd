@@ -1,54 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Greys Funtime Gmod Server!</title>
+<meta charset="utf-8">
+<title>Server Welcome</title>
 
 <style>
-body{
-    background:#121212;
-    color:white;
-    font-family:Arial, sans-serif;
-    text-align:center;
-    margin:0;
+
+/* =========================
+   CUSTOMIZATION KNOBS
+   ========================= */
+
+:root{
+
+--title-font: Impact, Arial Black, sans-serif;
+--description-font: Georgia, serif;
+
+--title-color: #ffffff;
+--description-color: #dddddd;
+
+--text-alignment: center;
+
+--panel-background: rgba(0,0,0,0.70);
+
 }
+
+
+/* =========================
+   PAGE BASE
+   ========================= */
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#111;
+color:white;
+}
+
+
+/* =========================
+   LAYOUT
+   ========================= */
 
 .container{
-    width:80%;
-    margin:auto;
-    padding-top:40px;
+width:95%;
+margin:30px auto 0 auto;
+display:flex;
+gap:20px;
+align-items:flex-start;
 }
 
-h1{
-    font-size:40px;
-    margin-bottom:10px;
+
+/* =========================
+   LEFT PANEL
+   ========================= */
+
+.left{
+width:40%;
+background:var(--panel-background);
+padding:20px;
+border-radius:8px;
 }
 
-.collection-button{
-    display:inline-block;
-    padding:15px 25px;
-    margin-top:20px;
-    background:#4CAF50;
-    color:white;
-    text-decoration:none;
-    font-size:20px;
-    border-radius:8px;
+
+/* HEADER TEXT */
+
+.header{
+text-align:var(--text-alignment);
 }
 
-.collection-button:hover{
-    background:#45a049;
+.header h1{
+margin-top:0;
+font-family:var(--title-font);
+color:var(--title-color);
 }
 
-.slideshow{
-    margin-top:40px;
+.header p{
+font-family:var(--description-font);
+color:var(--description-color);
+font-size:18px;
+margin-bottom:20px;
 }
 
-.slideshow img{
-    width:80%;
-    max-height:450px;
-    object-fit:cover;
-    border-radius:10px;
+
+/* LEFT IMAGE SLIDESHOW */
+
+.left-slideshow img{
+width:100%;
+border-radius:6px;
 }
+
+
+/* =========================
+   RIGHT PANEL
+   ========================= */
+
+.right{
+width:60%;
+background:var(--panel-background);
+padding:10px;
+border-radius:8px;
+}
+
+.right img{
+width:100%;
+border-radius:6px;
+}
+
+
+/* =========================
+   SLIDE CONTROL
+   ========================= */
+
+.slide{
+display:none;
+}
+
+.slide.active{
+display:block;
+}
+
 </style>
 </head>
 
@@ -56,42 +126,84 @@ h1{
 
 <div class="container">
 
-<h1>Welcome to Grey's Garrysmod Server!</h1>
-<p>Make sure you install the workshop collection before joining.</p>
+
+<div class="left">
+
+<div class="header">
+<h1>Welcome to the Server</h1>
+
+<p>
+If you haven't downloaded the addons collection yet, please open the Steam Workshop and search for "Greys 2026 Server Mods". 
+This will make it alot faster for you to join!
+</p>
+
+</div>
 
 
-<a class="collection-button" href="https://steamcommunity.com/sharedfiles/filedetails/?id=3680856353" target="_blank">
-Open Workshop Collection
-</a>
+<div class="left-slideshow">
 
-<div class="slideshow">
-<img id="slide" src="images/image1.jpg">
+<img class="slide active" src="images/step1.png">
+<img class="slide" src="images/step2.png">
+<img class="slide" src="images/step3.png">
+
 </div>
 
 </div>
+
+
+
+<div class="right">
+
+<img id="rightSlide" src="server1.jpg">
+
+</div>
+
+</div>
+
 
 <script>
 
-const images = [
+/* LEFT slideshow */
+
+let leftSlides = document.querySelectorAll(".left-slideshow .slide");
+let leftIndex = 0;
+
+function nextLeft(){
+
+leftSlides[leftIndex].classList.remove("active");
+leftIndex = (leftIndex + 1) % leftSlides.length;
+leftSlides[leftIndex].classList.add("active");
+
+}
+
+setInterval(nextLeft,5000);
+
+
+
+/* RIGHT slideshow */
+
+let rightImages = [
+
 "images/Day_grey.png",
 "images/chat.png",
 "images/furry.jpg",
 "images/grind.jpg",
-"images/small_grey.jpg",
+"images/small_grey.png",
 "images/heckdivers.png",
 "images/Grey_night.png"
+
 ];
 
-function randomSlide(){
-    const slide = document.getElementById("slide");
-    const randomIndex = Math.floor(Math.random() * images.length);
-    slide.src = images[randomIndex];
+let rightIndex = 0;
 
-    const nextTime = 8000 + Math.random()*2000;
-    setTimeout(randomSlide, nextTime);
+function nextRight(){
+
+rightIndex = (rightIndex + 1) % rightImages.length;
+document.getElementById("rightSlide").src = rightImages[rightIndex];
+
 }
 
-randomSlide();
+setInterval(nextRight,6000);
 
 </script>
 
