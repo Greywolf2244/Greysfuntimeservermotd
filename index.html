@@ -142,9 +142,9 @@ This will make it alot faster for you to join!
 
 <div class="left-slideshow">
 
-<img class="slide active" src="images/15.png">
-<img class="slide" src="images/16.png">
-<img class="slide" src="images/17.png">
+<img class="slide active" src="images/Steps/Step1.png">
+<img class="slide" src="images/Steps/Step2.png">
+<img class="slide" src="imagesSteps/Step3.png">
 
 </div>
 
@@ -187,38 +187,55 @@ let rightImages = [
 "images/1.jpg",
 "images/2.jpg",
 "images/3.jpg",
-"images/4.jpg",
-"images/5.jpg",
+"images/4.png",
+"images/5.png",
 "images/6.jpg",
-"images/7.jpg",
+"images/7.png",
 "images/8.png",
-"images/9.png",
+"images/9.jpg",
 "images/10.jpg",
 "images/11.png",
 "images/12.jpg",
-"images/13.png",
-"images/14.png",
-"images/18.png",
-"images/19.png",
-"images/20.png",
-"images/21.png",
-"images/22.png",
-"images/23.png",
-"images/24.png",
+"images/13.jpg",
+"images/14.jpg",
+"images/15.jpg",
+"images/16.jpg",
+"images/17.png",
 ];
 
+function shuffleArray(array){
+for(let i = array.length - 1; i > 0; i--){
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+}
+
+function randomDelay(){
+return Math.floor(Math.random() * 2000) + 4000;
+}
+
 let rightIndex = 0;
+let rightSlide = document.getElementById("rightSlide");
+
+shuffleArray(rightImages);
+rightSlide.src = rightImages[rightIndex];
 
 function nextRight(){
 
-rightIndex = (rightIndex + 1) % rightImages.length;
-document.getElementById("rightSlide").src = rightImages[rightIndex];
+rightIndex++;
+
+if(rightIndex >= rightImages.length){
+rightIndex = 0;
+shuffleArray(rightImages);
+}
+
+rightSlide.src = rightImages[rightIndex];
+setTimeout(nextRight, randomDelay());
 
 }
 
-setInterval(nextRight,6000);
+setTimeout(nextRight, randomDelay());
 
 </script>
-
 </body>
 </html>
